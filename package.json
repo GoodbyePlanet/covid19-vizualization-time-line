@@ -15,5 +15,10 @@
   "license": "ISC",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "@amcharts/amcharts4": "^4.9.33",
+    "axios": "^0.19.2",
+    "dateformat": "^3.0.3"
   }
 }
