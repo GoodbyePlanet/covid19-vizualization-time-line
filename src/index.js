@@ -74,9 +74,16 @@ async function getAllCasesForContry(country) {
   }
 }
 
+function getTotalCases(cases) {
+  return cases.reduce((acc, curr) => {
+    const caseValues = Object.values(curr.cases);
+    return (acc += caseValues[caseValues.length - 1]);
+  }, 0);
+}
+
 // HIGH CHARTS
 
-const startingDate = '2/25/20';
+const startingDate = "2/25/20";
 let startDate = new Date("2/25/20");
 
 var initialData, chart;
@@ -88,7 +95,7 @@ let startYear = dateFormat(startDate, "m/d/yy"),
 var endDate;
 
 (async function initializeEndDate() {
-  endDate = await getLastDate();  
+  endDate = await getLastDate();
 })();
 
 /**
@@ -166,10 +173,6 @@ var endDate;
   });
 })(Highcharts);
 
-/**
- * Calculate the data output
- */
-
 function getData(year) {
   let output = initialData
     .map((data) => {
@@ -215,7 +218,9 @@ Highcharts.getJSON(
       },
       title: {
         useHTML: true,
-        text: `World population - overall: <b>${getData(startYear)[0][1]}</b>`,
+        text: `Total number of cases in Balkan countries: <b>${getTotalCases(
+          initialData
+        )}</b>`,
       },
 
       legend: {
@@ -236,7 +241,7 @@ Highcharts.getJSON(
         {
           opposite: true,
           title: {
-            text: "Population per country",
+            text: "Cases per country",
           },
           tickAmount: 5,
         },
@@ -273,26 +278,12 @@ async function update(increment) {
       "m/d/yy"
     );
   }
-  
+
   if (new Date(input.value) >= endDate) {
     input.value = startingDate;
     startDate = new Date("2/25/20");
     pause(btn);
   }
-
-  chart.update(
-    {
-      title: {
-        useHTML: true,
-        text: `<div>World population - overall: <b>${
-          getData(input.value)[0][1]
-        }</b></span></div>`,
-      },
-    },
-    false,
-    false,
-    false
-  );
 
   chart.series[0].update({
     name: input.value,
