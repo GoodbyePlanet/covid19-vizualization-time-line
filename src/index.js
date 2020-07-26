@@ -18,6 +18,8 @@ const {
 const BASE_COVID_API_URL = "https://disease.sh/v3/";
 const HISTORICAL = "covid-19/historical/";
 const REQUEST_PARAM = "?lastdays=-1"; // From API docs (use -1 to get all data)
+const DATE_FORMAT = "m/d/yy";
+const START_DATE = "2/24/20";
 
 async function getLastDate() {
   const data = await getCases();
@@ -83,12 +85,11 @@ function getTotalCases(cases) {
 
 // HIGH CHARTS
 
-const startingDate = "2/25/20";
-let startDate = new Date("2/25/20");
+const startingDate = START_DATE;
+let startDate = new Date(START_DATE);
 
 var initialData, chart;
-let startYear = dateFormat(startDate, "m/d/yy"),
-  endYear = 2018,
+let startYear = dateFormat(startDate, DATE_FORMAT),
   btn = document.getElementById("play-pause-button"),
   input = document.getElementById("play-range");
 
@@ -126,14 +127,11 @@ var endDate;
     this.elem.attr(this.prop, currentValue, null, true);
   };
 
-  // Add textGetter, not supported at all at this moment:
   H.SVGElement.prototype.textGetter = function (hash, elem) {
     var ct = this.text.element.textContent || "";
     return this.endText ? this.endText : ct.substring(0, ct.length / 2);
   };
 
-  // Temporary change label.attr() with label.animate():
-  // In core it's simple change attr(...) => animate(...) for text prop
   H.wrap(H.Series.prototype, "drawDataLabels", function (proceed) {
     var ret,
       attr = H.SVGElement.prototype.attr,
@@ -198,8 +196,8 @@ Highcharts.getJSON(
           ],
         },
         style: {
-          fontFamily: 'Courier New',
-      },
+          fontFamily: "Courier New",
+        },
         animation: {
           duration: 500,
         },
@@ -271,13 +269,13 @@ async function update(increment) {
   if (increment) {
     input.value = dateFormat(
       new Date(startDate.setDate(startDate.getDate() + 1)),
-      "m/d/yy"
+      DATE_FORMAT
     );
   }
 
   if (new Date(input.value) >= endDate) {
     input.value = startingDate;
-    startDate = new Date("2/25/20");
+    startDate = new Date(START_DATE);
     pause(btn);
   }
 
@@ -322,3 +320,19 @@ btn.addEventListener("click", function () {
 input.addEventListener("click", function () {
   update();
 });
+
+const modal = document.getElementById("modal-id");
+
+document.getElementById("open-modal-button").onclick = function () {
+  modal.style.display = "block";
+};
+
+document.getElementsByClassName("close")[0].onclick = function () {
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
