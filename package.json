@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html"
+    "dev": "parcel index.html",
+    "now-build": "parcel build index.html"
   },
   "keywords": [
     "coronavirus",
