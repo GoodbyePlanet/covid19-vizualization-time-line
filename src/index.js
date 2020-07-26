@@ -1,9 +1,7 @@
 import "regenerator-runtime/runtime";
 import axios from "axios";
-
-import { balkanCountries } from "./constants";
-
 import dateFormat from "dateformat";
+import { balkanCountries } from "./constants";
 
 const {
   SERBIA,
@@ -20,31 +18,6 @@ const {
 const BASE_COVID_API_URL = "https://disease.sh/v3/";
 const HISTORICAL = "covid-19/historical/";
 const REQUEST_PARAM = "?lastdays=-1"; // From API docs (use -1 to get all data)
-
-///////
-
-// aaa();
-
-// async function aaa() {
-//   const date = new Date("3/24/20");
-
-//   console.log(dateFormat(date, "m/dd/yy"));
-
-//   const dd = await getCases();
-
-//   console.log(dd);
-
-//   const gg = await getData();
-
-//   console.log("GG", gg);
-
-//   const lastDate = await getLastDate();
-//   console.log("LAST DATE ", dateFormat(date, "m/d/yy"));
-
-//   if (dateFormat(lastDate, "m/dd/yy") === "7/24/20") {
-//     console.log("THEY ARE THE SAME");
-//   }
-// }
 
 async function getLastDate() {
   const data = await getCases();
@@ -101,15 +74,7 @@ async function getAllCasesForContry(country) {
   }
 }
 
-//     const lastDate = await getLastDate();
-//     if (startDate > lastDate) {
-//       startDate = new Date("2/25/20");
-//     }
-
-// if (dateFormat(startDate, "m/d/yy") === "1/23/2020")
-
 // HIGH CHARTS
-
 
 const startingDate = '2/25/20';
 let startDate = new Date("2/25/20");
@@ -119,6 +84,12 @@ let startYear = dateFormat(startDate, "m/d/yy"),
   endYear = 2018,
   btn = document.getElementById("play-pause-button"),
   input = document.getElementById("play-range");
+
+var endDate;
+
+(async function initializeEndDate() {
+  endDate = await getLastDate();  
+})();
 
 /**
  * Animate dataLabels functionality
@@ -296,14 +267,13 @@ Highcharts.getJSON(
  * or from a timer when the timeline is playing.
  */
 async function update(increment) {
-  const endDate = await getLastDate();
-
   if (increment) {
     input.value = dateFormat(
       new Date(startDate.setDate(startDate.getDate() + 1)),
       "m/d/yy"
     );
   }
+  
   if (new Date(input.value) >= endDate) {
     input.value = startingDate;
     startDate = new Date("2/25/20");
