@@ -1,14 +1,56 @@
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
 
-#parentContainer {
-  min-width: 320px;
-  max-width: 800px;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(246, 238, 229, 1) 50%
+  );
+  font-family: 'Courier New', Courier, monospace;
 }
 
-#play-controls {
-  position: absolute;
-  left: 100px;
-  top: 350px;
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.controls {
+  margin-top: 10px;
+}
+
+#container {
+  width: 700px;
+  height: 700px;
+  margin: 0 auto;
+  border-radius: 15px;
+
+  -webkit-box-shadow: 10px 10px 46px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 46px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 46px 0px rgba(0, 0, 0, 0.75);
+}
+
+#parentContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+}
+
+#play-pause-button {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+#play-range {
+  height: 33px;
+  transform: translateY(0px) !important;
 }
 
 #play-pause-button {
@@ -22,4 +64,29 @@
 
 #play-range {
   transform: translateY(2.5px);
+}
+
+/* Media Queries */
+@media only screen and (max-width: 450px) {
+  h3 {
+    font-size: smaller;
+  }
+
+  #container {
+    width: 400px;
+    height: 500px;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  h3 {
+    font-size: smaller;
+  }
+
+  #container {
+    width: 340px;
+    height: 500px;
+    margin: 0 auto;
+  }
 }

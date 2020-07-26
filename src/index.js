@@ -185,28 +185,24 @@ function getData(year) {
 
 Highcharts.getJSON(
   "https://api.npoint.io/d70fd8f47a70326609bb",
-  async function (data) {
+  async function () {
     initialData = await getCases();
 
     chart = Highcharts.chart("container", {
       chart: {
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+          stops: [
+            [0, "#ffffff"],
+            [1, "#f6eee5"],
+          ],
+        },
+        style: {
+          fontFamily: 'Courier New',
+      },
         animation: {
           duration: 500,
         },
-        events: {
-          render() {
-            let chart = this;
-
-            // Responsive input
-            input.style.width =
-              chart.plotWidth -
-              chart.legend.legendWidth +
-              chart.plotLeft / 2 -
-              10 +
-              "px"; // where 10 is a padding
-          },
-        },
-        marginRight: 50,
       },
       plotOptions: {
         series: {
@@ -217,7 +213,7 @@ Highcharts.getJSON(
         },
       },
       title: {
-        useHTML: true,
+        align: "center",
         text: `Total number of cases in Balkan countries: <b>${getTotalCases(
           initialData
         )}</b>`,
