@@ -3,7 +3,7 @@
 The purpose of this project is to provide visualized data about the current
 impact of COVID-19 in the Balkan countries, using Highcharts - Bar chart race
 
-Web app is created with vanila JavaScript. Web app links: <https://covid19-vizualization-time-line.vercel.app>
+Web app is created with vanila JavaScript. Web app link: <https://covid19-vizualization-time-line.vercel.app>
 
 ![Covid19](src/assets/vizualization-covid19.gif)
 
