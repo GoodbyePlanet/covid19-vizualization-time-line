@@ -1,7 +1,7 @@
 import "regenerator-runtime/runtime";
 import axios from "axios";
 import dateFormat from "dateformat";
-import { balkanCountries } from "./constants";
+import { balkanCountries, colors } from "./constants";
 
 const {
   SERBIA,
@@ -85,19 +85,16 @@ function getTotalCases(cases) {
 
 // HIGH CHARTS
 
-const startingDate = START_DATE;
 let startDate = new Date(START_DATE);
+let startDateStringFormat = dateFormat(startDate, DATE_FORMAT);
 
 var initialData, chart;
-let startYear = dateFormat(startDate, DATE_FORMAT),
-  btn = document.getElementById("play-pause-button"),
-  input = document.getElementById("play-range");
-
+let playPauseButton = document.getElementById("play-pause-button");
+let input = document.getElementById("play-range");
 var endDate;
 
 (async function initializeEndDate() {
   endDate = await getLastDate();
-  // try here with autoplay...
 })();
 
 /**
@@ -172,10 +169,10 @@ var endDate;
   });
 })(Highcharts);
 
-function getData(year) {
+function getData(date) {
   let output = initialData
     .map((data) => {
-      return [data["countryName"], data.cases[year]];
+      return [data["countryName"], data.cases[date]];
     })
     .sort((a, b) => b[1] - a[1]);
 
@@ -192,8 +189,8 @@ Highcharts.getJSON(
         backgroundColor: {
           linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
           stops: [
-            [0, "#ffffff"],
-            [1, "#f6eee5"],
+            [0, colors.WHITE],
+            [1, colors.LIGHT_ORANGE],
           ],
         },
         style: {
@@ -254,11 +251,13 @@ Highcharts.getJSON(
               enabled: true,
             },
           ],
-          name: startYear,
-          data: getData(startYear)[1],
+          name: startDateStringFormat,
+          data: getData(startDateStringFormat)[1],
         },
       ],
     });
+    // Start playing automatically once the chart is initialized
+    play(playPauseButton);
   }
 );
 
@@ -275,9 +274,9 @@ async function update(increment) {
   }
 
   if (new Date(input.value) >= endDate) {
-    input.value = startingDate;
+    input.value = START_DATE;
     startDate = new Date(START_DATE);
-    pause(btn);
+    pause(playPauseButton);
   }
 
   chart.series[0].update({
@@ -308,18 +307,12 @@ function pause(button) {
   chart.sequenceTimer = undefined;
 }
 
-btn.addEventListener("click", function () {
+playPauseButton.addEventListener("click", function () {
   if (chart.sequenceTimer) {
     pause(this);
   } else {
     play(this);
   }
-});
-/**
- * Trigger the update on the range bar click.
- */
-input.addEventListener("click", function () {
-  update();
 });
 
 const modal = document.getElementById("modal-id");

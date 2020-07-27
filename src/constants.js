@@ -10,4 +10,9 @@ const balkanCountries = {
   GREECE: "Greece",
 };
 
-export { balkanCountries };
+const colors = {
+  LIGHT_ORANGE: "#f6eee5",
+  WHITE: "#ffffff"
+}
+
+export { balkanCountries, colors };
