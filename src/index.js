@@ -97,6 +97,7 @@ var endDate;
 
 (async function initializeEndDate() {
   endDate = await getLastDate();
+  // try here with autoplay...
 })();
 
 /**

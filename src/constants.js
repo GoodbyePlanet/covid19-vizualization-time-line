@@ -10,16 +10,4 @@ const balkanCountries = {
   GREECE: "Greece",
 };
 
-const countryCodes = {
-  ME: "ME",
-  AL: "AL",
-  MK: "MK",
-  BG: "BG",
-  BA: "BA",
-  SI: "SI",
-  HR: "HR",
-  RS: "RS",
-  GR: "GR",
-};
-
-export { balkanCountries, countryCodes };
+export { balkanCountries };
