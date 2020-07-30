@@ -80,10 +80,10 @@ function getTotalCases(cases) {
   return cases.reduce((acc, curr) => {
     const caseValues = Object.values(curr.cases);
     return (acc += caseValues[caseValues.length - 1]);
-  }, 0);
+  }, 0).toLocaleString();
 }
 
-// HIGH CHARTS
+// HIGH CHART
 
 let startDate = new Date(START_DATE);
 let startDateStringFormat = dateFormat(startDate, DATE_FORMAT);
@@ -274,9 +274,9 @@ async function update(increment) {
   }
 
   if (new Date(input.value) >= endDate) {
+    pause(playPauseButton);
     input.value = START_DATE;
     startDate = new Date(START_DATE);
-    pause(playPauseButton);
   }
 
   chart.series[0].update({
