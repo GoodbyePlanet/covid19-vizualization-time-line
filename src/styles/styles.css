@@ -205,6 +205,14 @@ h3 {
     font-size: smaller;
   }
 
+  .main-container {
+    justify-content: center;
+  }
+
+  .modal-content {
+    width: 80%;
+  }
+
   #container {
     width: 400px;
     height: 500px;
