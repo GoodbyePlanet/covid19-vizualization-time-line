@@ -20,6 +20,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.33",
     "axios": "^0.19.2",
-    "dateformat": "^3.0.3"
+    "dateformat": "^3.0.3",
+    "tsparticles": "^1.17.6"
   }
 }
