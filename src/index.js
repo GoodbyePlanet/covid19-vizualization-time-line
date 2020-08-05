@@ -338,55 +338,55 @@ tsParticles.load("tsparticles", {
   fpsLimit: 60,
   particles: {
     number: {
-      value: 88,
+      value: 80,
       density: {
         enable: true,
-        value_area: 700,
-      },
+        value_area: 1000
+      }
     },
     color: {
-      value: ["#DC143C", "#A52A2A", "#8B0000", "#B22222"],
+      value: ["#DC143C", "#A52A2A", "#8FBC8F", "#B22222"],
     },
     shape: {
-      type: "circle",
+      type: ["circle"],
       stroke: {
         width: 0,
-        color: "#B22222",
+        color: "#fff"
       },
       polygon: {
-        nb_sides: 15,
+        nb_sides: 5
       },
     },
     opacity: {
-      value: 0.5,
+      value: 1,
       random: false,
       anim: {
         enable: false,
-        speed: 1.5,
-        opacity_min: 0.15,
-        sync: false,
-      },
+        speed: 1,
+        opacity_min: 0.1,
+        sync: false
+      }
     },
     size: {
-      value: 2.5,
-      random: false,
+      value: 4,
+      random: true,
       anim: {
-        enable: true,
-        speed: 2,
-        size_min: 0.15,
-        sync: false,
-      },
+        enable: false,
+        speed: 10,
+        size_min: 10,
+        sync: false
+      }
     },
     line_linked: {
       enable: true,
-      distance: 110,
-      color: "#B22222",
-      opacity: 0.25,
-      width: 1,
+      distance: 150,
+      color: "#ff9999",
+      opacity: 0.4,
+      width: 1
     },
     move: {
       enable: true,
-      speed: 1.6,
+      speed: 5,
       direction: "none",
       random: false,
       straight: false,
@@ -395,48 +395,49 @@ tsParticles.load("tsparticles", {
       attract: {
         enable: false,
         rotateX: 600,
-        rotateY: 1200,
-      },
-    },
+        rotateY: 1200
+      }
+    }
   },
   interactivity: {
     detect_on: "canvas",
     events: {
       onhover: {
-        enable: false,
-        mode: "repulse",
+        enable: true,
+        mode: "grab"
       },
       onclick: {
-        enable: false,
-        mode: "push",
+        enable: true,
+        mode: "push"
       },
-      resize: true,
+      resize: true
     },
     modes: {
       grab: {
-        distance: 400,
+        distance: 140,
         line_linked: {
-          opacity: 1,
-        },
+          opacity: 1
+        }
       },
       bubble: {
         distance: 400,
         size: 40,
         duration: 2,
         opacity: 8,
-        speed: 3,
+        speed: 3
       },
       repulse: {
         distance: 200,
-        duration: 0.4,
+        duration: 0.4
       },
       push: {
-        particles_nb: 4,
+        particles_nb: 4
       },
       remove: {
-        particles_nb: 2,
-      },
-    },
+        particles_nb: 2
+      }
+    }
   },
-  retina_detect: true,
+  retina_detect: true
 });
+
