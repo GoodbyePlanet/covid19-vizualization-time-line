@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.33",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dateformat": "^3.0.3"
   }
 }
